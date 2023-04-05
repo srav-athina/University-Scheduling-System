@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+</head>
+
+<body>
+    <h1>
+        Please select your course and add necessary dependencies
+    </h1>
+
+    <form action="/add_dependency_conf/" method="post">{% csrf_token %}
+
+
+        <div>
+            <label for="course">Select the course:</label>
+            <select name="course" id="course">
+                {% for c in courses %}
+                <option value="{{ c.id }}">{{ c.number }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="dependencies">Dependencies:</label>
+            <select name="dependencies" id="dependencies" multiple>
+                {% for c in courses %}
+                <option value="{{ c.id }}">{{ c.number }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button class="button button2" type="submit" value="OK">Submit</button>
+
+    </form>
+</body>
+
+</html>

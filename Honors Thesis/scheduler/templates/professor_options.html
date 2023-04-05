@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+  </head>
+
+  <body>
+    <h1>Semesterly Schedule Designer</h1>
+
+          <button
+            class="button button1"
+            onClick="location.href='http://127.0.0.1:8000/add_professor'"
+          >
+            Make a new submission!
+          </button>
+
+          <button
+            class="button button2"
+            onClick="location.href='http://127.0.0.1:8000/update_prof'"
+          >
+            Update your submission.
+          </button>
+
+  </body>
+</html>

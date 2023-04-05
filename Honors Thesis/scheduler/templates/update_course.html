@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+</head>
+
+<body>
+    <h1>Please enter your course's dept and number. To update the course, please re-enter all course details.
+    </h1>
+    <div>
+        <form action="/update_course_conf/" method="post">{% csrf_token %}
+            <div>
+                <label for="old_dept">Dept:</label>
+                <input id="old_dept" type="text" name="old_dept" placeholder="Enter the course's dept" />
+            </div>
+
+            <div>
+                <label for="old_number">Course Number:</label>
+                <input id="old_number" type="text" name="old_number" placeholder="Enter the course's number" />
+            </div>
+
+            <div>
+                <label for="new_dept">New Dept:</label>
+                <input id="new_dept" type="text" name="new_dept" placeholder="Enter the course's updated dept" />
+            </div>
+
+            <div>
+                <label for="new_number">New Course Number:</label>
+                <input id="new_number" type="text" name="new_number" placeholder="Enter the course's updated number" />
+            </div>
+
+            <div>
+                <label for="new_course_name">New Course Name:</label>
+                <input id="new_course_name" type="text" name="new_course_name" placeholder="Enter the course's updated name" />
+            </div>
+
+            <div>
+                <label for="new_credits">New Credits:</label>
+                <input id="new_credits" type="text" name="new_credits" placeholder="Enter course's updated credit hours" />
+            </div>
+
+            <button class="button button2" type="submit" value="OK">Submit</button>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
