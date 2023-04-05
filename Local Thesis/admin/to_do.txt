@@ -1,0 +1,15 @@
+#all potential times
+
+#put in times that I could do it but don't prefer to
+#try preferred and then try hard constraints
+
+#lab tas - office hours, lab sections (should be fair), can't overlap more than 3 lab sections
+#organize 
+
+#only for 1010 (24 tas
+#maybe liek give difficulty to lab and office hours
+
+#professors have credit hours per year)
+#senior design coutns as 1 course
+
+#sections?

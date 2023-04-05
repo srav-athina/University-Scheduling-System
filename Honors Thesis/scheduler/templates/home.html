@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+  </head>
+
+  <body>
+    <h1>Semesterly Schedule Designer</h1>
+
+          <button
+            class="button button1"
+            onClick="location.href='http://127.0.0.1:8000/professor_options'"
+          >
+            Input your preferences for the semester.
+          </button>
+
+          <button
+            class="button button2"
+            onClick="location.href='http://127.0.0.1:8000/output'"
+          >
+            View all viable schedules at the moment.
+          </button>
+
+          <button
+          class="button button2"
+          onClick="location.href='http://127.0.0.1:8000/directory_manager'"
+        >
+          Update our directory of courses.
+        </button>
+        
+        <button
+        class="button button2"
+        onClick="location.href='http://127.0.0.1:8000/curr_data'"
+        >
+        See current database entries
+        </button>
+    <p>
+      Displayed below is the department head's top choice for this semester's
+      schedule.
+    </p>
+  </body>
+</html>

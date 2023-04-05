@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+</head>
+<body>
+<h1>
+What kind of addition would you like to make to our directory?
+</h1>
+
+<button
+class="button button1"
+onClick="location.href='http://127.0.0.1:8000/add_course'"
+>
+Add a course
+</button>
+
+<button
+class="button button1"
+onClick="location.href='http://127.0.0.1:8000/remove_course'"
+>
+Remove a course
+</button>
+
+<button
+class="button button1"
+onClick="location.href='http://127.0.0.1:8000/update_course'"
+>
+Update a course
+</button>
+
+<button
+class="button button2"
+onClick="location.href='http://127.0.0.1:8000/add_remove_dependency'"
+>
+Update a course's dependencies
+</button>
+
+</body>
+</html>

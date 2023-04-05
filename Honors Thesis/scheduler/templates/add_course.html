@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+</head>
+<body>
+<h1>
+Would you like to add a course to our directory?
+</h1>
+<form action="/add_course_conf/" method="post">{% csrf_token %}
+    <div>
+        <label for="dept">Dept:</label>
+        <input id="dept" type="text" name="dept" placeholder="Enter the course's dept" />
+    </div>
+
+    <div>
+        <label for="number">Course Number:</label>
+        <input id="number" type="text" name="number" placeholder="Enter the course's number" />
+    </div>
+
+    <div>
+        <label for="course_name">Course Name:</label>
+        <input id="course_name" type="text" name="course_name" placeholder="Enter the course's name" />
+    </div>
+
+    <div>
+        <label for="credits">Credits:</label>
+        <input id="credits" type="text" name="credits" placeholder="Enter course credit hours" />
+    </div>
+
+    <button class="button button2" type="submit" value="OK">Submit</button>
+</form>
+
+</body>
+</html>

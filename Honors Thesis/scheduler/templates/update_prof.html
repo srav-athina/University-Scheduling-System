@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+</head>
+<!-- Inputs needed: Prof name, course prefs, hard times, soft times,  -->
+
+<body>
+
+        <h1>Survey</h1>
+        <form action="/update_prof_conf/" method="post">{% csrf_token %}
+            <div>
+                <label for="prof_id">University ID:</label>
+                <input type="text" name="prof_id" placeholder="Enter your university ID." />
+            </div>
+            
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name" placeholder="Enter your name" />
+            </div>
+
+            <div>
+                <label for="courses">Course preferences:</label>
+                <select name="courses" multiple>
+                    {% for c in courses %}
+                    <option value="{{ c.id }}">{{ c.number }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="hard_prefs">Hard Times:</label>
+                <select name="hard_prefs" multiple>
+                    {% for t in times %}
+                    <option value="{{ t }}">{{ t }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="soft_prefs">Soft Times:</label>
+                <select name="soft_prefs" multiple>
+                    {% for t in times %}
+                    <option value="{{ t }}">{{ t }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="button button2" type="submit" value="OK">Submit</button>
+        </form>
+</body>
+</html>
