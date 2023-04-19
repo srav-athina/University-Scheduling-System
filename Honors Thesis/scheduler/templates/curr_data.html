@@ -3,7 +3,8 @@
 
 <head>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'table_styles.css' %}" />
+
 </head>
 
 <body>
@@ -11,27 +12,91 @@
         Here is the current data! </h1>
 
     <div>
-        Here are is a list of professors currently in the directory:
-        {% for p in profs %}
-        <tr>
-            <td>{{ p.profID }}</td>
-            <td>{{ p.name }}</td>
+        <table>
+            <caption>Here are is a list of professors currently in the directory:</caption>
+            <thead>
+                <tr>
+                    <th>Professor ID</th>
+                    <th>Name</th>
+                    <th>Course Prefs</th>
+                    <th>Hard Times</th>
+                    <th>Soft Times</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in profs %}
+                <tr>
+                    <td>{{ p.profID }}</td>
+                    <td>{{ p.name }}</td>
 
-            {% endfor %}
+                <td>
+                    <ul>
+                        {% for c in p.courses.all %}
+                        <li>{{ c.number }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                
+                <td>
+                    <ul>
+                        {% for t in p.hard_times %}
+                        <li>{{ t }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+
+                <td>
+                    <ul>
+                        {% for t in p.soft_times %}
+                        <li>{{ t }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
     <div>
-        Here are is a list of courses currently in the directory:
-        {% for c in courses %}
-        <tr>
-            <td>{{ c.dept }}</td>
-            <td>{{ c.number }}</td>
-            <td>{{ c.name }}</td>
-            <td>{{ c.credits }}</td>
 
-            {% endfor %}
+        <table>
+            <caption>Here are is a list of courses currently in the directory:</caption>
+            <thead>
+                <tr>
+                    <th>Dept</th>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th>Credits</th>
+                    <th>Dependencies</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in courses %}
+
+                <tr>
+                    <td>{{ c.dept }}</td>
+                    <td>{{ c.number }}</td>
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.credits }}</td>
+
+                    <td>
+                        <ul>
+                            {% for d in c.dependencies.all %}
+                            <li>{{ d.number }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
+    <button class="button button1" onClick="location.href='http://127.0.0.1:8000/flush_everything'">
+        Flush the data
+    </button>
 </body>
 
 </html>

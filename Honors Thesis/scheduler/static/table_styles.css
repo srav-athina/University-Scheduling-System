@@ -1,0 +1,36 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 40px;
+  border: 1px solid black; /* Add a border around the entire table */
+
+  /* Add some space between tables */
+}
+
+th {
+  text-align: left;
+  font-weight: bold;
+  /* Make the table headings bold */
+  border: 1px solid black; /* Add a border around the entire table */
+}
+
+td {
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid black; /* Add a border around the entire table */
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.list-column {
+  width: 150px;
+}

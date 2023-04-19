@@ -29,5 +29,7 @@ urlpatterns = [
     path("add_dependency/", addDependencyView, name="addDependency"),
     path("add_dependency_conf/", addDependencyConfView, name="addDependencyConf"),
 
+    path("generate_profs/", generateProfsView, name="generateProfs"),
+
     path("", homePageView, name="home"),
 ]

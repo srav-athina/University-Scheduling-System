@@ -8,10 +8,6 @@
 <!-- Inputs needed: Prof name, course prefs, hard times, soft times,  -->
 
 <body>
-    {% for x in profs %}
-    <tr>
-        <td>{{ x.name }}</td>
-        {% endfor %}
 
         <h1>Survey</h1>
         <form action="/add_professor_conf/" method="post">{% csrf_token %}
