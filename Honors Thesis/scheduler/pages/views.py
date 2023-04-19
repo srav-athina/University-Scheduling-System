@@ -1,26 +1,69 @@
+import random
+from random import sample
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from django.http import HttpResponse
 from pages.models import Prof, Course, Room
-TIMES = [('MWF','08:00','10:30'), ('MWF','09:05','9:55'), ('MWF','10:10','11:00'), ('MWF','11:15','12:05'), ('MWF','12:20','1:10'), ('MWF','1:25','2:15'), ('MWF','2:30','3:20'), ('MWF','3:35','4:25'), ('MWF','4:40','5:30'), 
-             ('TR','08:00','09:15'), ('TR','09:30','10:45'), ('TR','11:00','12:15'), ('TR','12:30','1:45'), ('TR','2:00','3:15'), ('TR','03:30','04:45'), 
-             ('MW','07:35','08:50'), ('MW','04:40','5:55'), ('MW','07:35','8:50'), ('MF','04:40','5:55'), ('WF','07:35','8:50'), ('WF','04:40','5:55')]
-    
+TIMES = [('MWF', '08:00', '10:30'), ('MWF', '09:05', '9:55'), ('MWF', '10:10', '11:00'), ('MWF', '11:15', '12:05'), ('MWF', '12:20', '1:10'), ('MWF', '1:25', '2:15'), ('MWF', '2:30', '3:20'), ('MWF', '3:35', '4:25'), ('MWF', '4:40', '5:30'),
+             ('TR', '08:00', '09:15'), ('TR', '09:30', '10:45'), ('TR', '11:00', '12:15'), (
+                 'TR', '12:30', '1:45'), ('TR', '2:00', '3:15'), ('TR', '03:30', '04:45'),
+             ('MW', '07:35', '08:50'), ('MW', '04:40', '5:55'), ('MW', '07:35', '8:50'), ('MF', '04:40', '5:55'), ('WF', '07:35', '8:50'), ('WF', '04:40', '5:55')]
 
-#logic to connect user inputs to database
+# to run alg, change schedule class in thesis to take in data inputs from thesis
+# make instances of course, dept, instructor, and c
 
-#dept, number, name, credits, dependencies
-#make sure to know that in course.py in logic, dept+number = number
+# make all the profs for the database
 
-#del all course and prof entries and make sure to print everything out on a page to see it all
-#create html pages, url pattern
-def cleanTablesView(request):
-    #remove all profs and courses
-    Prof.objects.all().delete()
-    Course.objects.all().delete()
+def generateProfsView(request): # ABOUT 34 NUMBER OF PROFS
+    # for i in range(34):
+    #     # Define the percentage range to randomly select from (50 to 80%)
+    #     lower_percentage = 50
+    #     upper_percentage = 80
+    #     # Calculate the number of items to select within the percentage range
+    #     num_times = int(len(TIMES) * random.uniform(lower_percentage/100, upper_percentage/100))
+    #     # Randomly select items from the list using a slice operation
+    #     ht = random.sample(TIMES, num_times)
+    #     st = random.sample(ht, len(ht)//2)
+
+    #     p = Prof(name="PROF"+str(i+1), profID=i+1, hard_times=ht, soft_times=st)
+    #     p.save()
+        
+    #     r = random.randint(5, 10)
+    #     for i in range(r):
+    #         random_courses = Course.objects.all().order_by('?')
+    #         selected_courses = random_courses[:r]
+
+    #         for c in selected_courses:
+    #             p.courses.add(c)
+    #     p.save()
+    return HttpResponse(render(request, 'generate_profs.html'))
 
 def currDataView(request):
     profs = Prof.objects.all()
+    #imma just del half of the prefs with this
+    # for prof in profs:
+    #     course_prefs = list(prof.courses.all())
+
+    #     # get the number of course preferences
+    #     num_course_prefs = len(course_prefs)
+
+    #     # calculate the number of course preferences to delete
+    #     num_to_delete = num_course_prefs // 2
+
+    #     # randomly select which course preferences to delete
+    #     to_delete = sample(range(num_course_prefs), num_to_delete)
+
+    #     # delete the selected course preferences
+    #     for index in sorted(to_delete, reverse=True):
+    #         del course_prefs[index]
+
+    #     # set the new course preferences for the professor
+    #     prof.courses.set(course_prefs)
+
+    for p in profs:
+        p.hard_times = [p.hard_times]
+        p.soft_times = [p.soft_times]
+
     courses= Course.objects.all()
     context = {"profs": profs, "courses": courses}
     return HttpResponse(render(request, 'curr_data.html', context=context))
@@ -121,13 +164,17 @@ def addDependencyConfView(request):
     course_id = request.POST["course"] #will be course key 
 
     course = Course.objects.get(id=course_id)
+    print(course)
+    print(course.dependencies.all())
     dependency_keys = request.POST.getlist("dependencies")
 
     for key in dependency_keys:
         print(key)
         c = Course.objects.get(id = key)
+        print(c)
         course.dependencies.add(c)
     course.save()
+
     return HttpResponse(render(request, 'add_dependency_conf.html'))
 
 def addCourseView(request):

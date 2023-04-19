@@ -40,7 +40,6 @@ button {
 }
 
 .vertical-center {
-  
   margin: 0;
   position: absolute;
   top: 50%;
@@ -49,6 +48,3 @@ button {
   transform: translateY(-50%);
 }
 
-table, th, td {
-  border:1px solid black;
-}
