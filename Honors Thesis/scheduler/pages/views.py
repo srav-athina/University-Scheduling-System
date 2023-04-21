@@ -1,9 +1,13 @@
+import ast
 import random
+import json
 from random import sample
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from django.http import HttpResponse
-from pages.models import Prof, Course, Room
+from pages.models import Prof, Course
+from LocalThesis.algorithm.genetic_alg import GeneticAlg
+
 TIMES = [('MWF', '08:00', '10:30'), ('MWF', '09:05', '9:55'), ('MWF', '10:10', '11:00'), ('MWF', '11:15', '12:05'), ('MWF', '12:20', '1:10'), ('MWF', '1:25', '2:15'), ('MWF', '2:30', '3:20'), ('MWF', '3:35', '4:25'), ('MWF', '4:40', '5:30'),
              ('TR', '08:00', '09:15'), ('TR', '09:30', '10:45'), ('TR', '11:00', '12:15'), (
                  'TR', '12:30', '1:45'), ('TR', '2:00', '3:15'), ('TR', '03:30', '04:45'),
@@ -72,10 +76,53 @@ def homePageView(request):
     return render(request, 'home.html')
 
 #MAIN ALG
+#courses, dependencies, profs, hard_prefs, soft_prefs, course_prefs, rooms
 def outputPageView(request):
-    #take prof and room info from database
-    #run genetic alg
-    #output the schedules
+    #key is dept and number, values are name, credits
+    courses = {}
+    dependencies = {}
+    for c in Course.objects.all():
+        courses[str(c.number)]=[c.dept, c.name, c.credits]
+        for d in c.dependencies.all():
+            if str(c.number) not in dependencies:
+                dependencies[str(c.number)] = []
+            dependencies[str(c.number)].append(str(d.number))
+
+    prof_names = []
+    hard_times = []
+    soft_times = []
+    course_prefs = []
+
+    for prof in Prof.objects.all():
+        prof_names.append(prof.name)
+        hard_times.append(ast.literal_eval(prof.hard_times))
+        #print(type(hard_times))
+        soft_times.append(ast.literal_eval(prof.soft_times))
+
+        tc = []
+        for course in prof.courses.all():
+            tc.append(str(course.number))
+        course_prefs.append(tc)
+
+    rooms = []
+    for i in range(1, 15):
+        rooms.append(("Building"+str(i), "Room"+str(i)))
+    
+    # Convert variables to a dictionary
+    data = {
+        "courses": courses,
+        "dependencies": dependencies,
+        "prof_names": prof_names,
+        "hard_times": hard_times,
+        "soft_times": soft_times,
+        "course_prefs": course_prefs,
+        "rooms": rooms
+    }
+
+    # Dump the dictionary to a JSON file
+    with open("LocalThesis/algorithm/output.json", "w") as f:
+        json.dump(data, f)
+
     return render(request, 'output.html')
 
 def profOptionsView(request):
@@ -156,7 +203,6 @@ def removeDependencyConfView(request):
     course.save()
     
     print(course.dependencies)  
-    print("hi")      
     return HttpResponse(render(request, 'remove_dependency_conf.html'))
 
 def addDependencyConfView(request):

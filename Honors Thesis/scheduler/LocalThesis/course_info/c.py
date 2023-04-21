@@ -1,7 +1,3 @@
-from course_info.instructor import Instructor
-from course_info.course import Course
-from course_info.dept import Dept
-
 class Class:
     def __init__(self, dept, course):
         self.dept = dept
@@ -49,5 +45,5 @@ class Class:
         self.room = room
 
     def __str__(self):
-        return str(self.get_dept()) + str(self.get_course().get_number()) + ", " + str(self.get_course().get_name()) + ", " + str(self.get_instructor().get_name()) + ", " + str(self.get_time()) + ", " + str(self.get_room())
+        return str(self.get_course().get_number()) + ", " + str(self.get_course().get_name()) + ", " + str(self.get_instructor().get_name()) + ", " + str(self.get_time()) + ", " + str(self.get_room())
 

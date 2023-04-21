@@ -1,4 +1,3 @@
-from course_info.meeting_time import ClassTime
 class Instructor:
     def __init__(self, name, hard_prefs, soft_prefs, course_prefs, type = None):
         self.name = name #string
