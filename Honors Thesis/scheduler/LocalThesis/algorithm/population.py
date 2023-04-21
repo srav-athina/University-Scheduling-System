@@ -1,4 +1,6 @@
-from schedule import Schedule
+import sys
+sys.path.append("C:\\Users\\jnaat\\OneDrive\\Documents\\School\\Thesis\\Honors Thesis\\scheduler\\LocalThesis")
+from algorithm.schedule import Schedule
 
 class Population:
     def __init__(self, size, courses, dependencies, profs, hard_prefs, soft_prefs, course_prefs, rooms):
@@ -22,3 +24,8 @@ class Population:
 
     def __len__(self):
         return len(self.schedules)
+    
+#git add .
+#git commit
+#comment something - esc - :wq
+#git push origin master
