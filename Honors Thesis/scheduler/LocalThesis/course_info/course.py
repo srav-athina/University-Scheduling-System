@@ -1,5 +1,3 @@
-from course_info.instructor import Instructor
-
 class Course():
     def __init__(self, number, name, instructors, credit_hours):
         self.number = number #string
