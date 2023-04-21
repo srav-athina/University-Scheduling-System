@@ -39,14 +39,22 @@ class Schedule:
             new_class.set_instructor(chosen_prof)
 
             # set time based on instructor
-            times = new_class.get_instructor().get_ha()
-            #print(times)
+            hard_times = new_class.get_instructor().get_ha()
+            soft_times = new_class.get_instructor().get_sa()
+            # Calculate the number of tuples to select from each list
+            hard_count = int(len(hard_times) * 0.2)
+            soft_count = int(len(soft_times) * 0.8)
+            # Randomly select the tuples from each list
+            selected_hard_times = rnd.sample(hard_times, hard_count)
+            selected_soft_times = rnd.sample(soft_times, soft_count)
+
+            # Combine the selected tuples into a new list
+            times = selected_hard_times + selected_soft_times
 
             t = times[rnd.randrange(0, len(times))]
             new_class.set_time(t)
             self.class_times[new_class.get_course().get_name()] = t
-
-
+            
             # calculate conflicts
 
             if t not in chosen_prof.get_sa():

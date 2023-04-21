@@ -1,5 +1,4 @@
 import sys
-#print(sys.path)
 sys.path.append("C:\\Users\\jnaat\\OneDrive\\Documents\\School\\Thesis\\Honors Thesis\\scheduler\\LocalThesis")
 
 from algorithm.schedule import Schedule
@@ -60,7 +59,7 @@ class GeneticAlg:
                     sched = Schedule(courses, dependencies, profs, hard_prefs, soft_prefs, course_prefs, rooms)
                 mutate_schedule.get_classes()[i] = sched.get_classes()[i]
         return mutate_schedule
-
+    
     def run(self, courses, dependencies, profs, hard_prefs_inputs, soft_prefs_inputs, course_pref, room_inputs):
         #pop will take in data and make sched
         course_prefs = []
