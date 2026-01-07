@@ -90,7 +90,3 @@ The core of this system uses a **Genetic Algorithm** to find the best schedule:
 3.  **Crossover:** Swaps parts of two high-scoring schedules to create a new "offspring" schedule.
 4.  **Mutation:** Randomly changes a class time or room to prevent getting stuck in local optima.
 5.  **Evolution:** Repeats this process over hundreds of generations until a conflict-free schedule is found.
-
-## 👤 Author
-
-**Sravanthi** *Completed as an Undergraduate Honors Thesis.*
